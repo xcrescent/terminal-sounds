@@ -3,7 +3,7 @@
   "displayName": "Terminal Sounds",
   "description": "Plays sounds on terminal events: open, close, command start, success, and failure.",
   "version": "0.1.0",
-  "publisher": "usjadon",
+  "publisher": "xcrescent",
   "license": "MIT",
   "engines": {
     "vscode": "^1.93.0"
