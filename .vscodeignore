@@ -1,0 +1,9 @@
+.vscode/
+src/
+scripts/
+out/
+node_modules/
+.gitignore
+tsconfig.json
+esbuild.mjs
+*.map

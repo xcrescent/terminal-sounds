@@ -1,0 +1,89 @@
+{
+  "name": "terminal-sounds",
+  "displayName": "Terminal Sounds",
+  "description": "Plays sounds on terminal events: open, close, command start, success, and failure.",
+  "version": "0.1.0",
+  "publisher": "usjadon",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Terminal Sounds",
+      "properties": {
+        "terminalSounds.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable all terminal sounds.",
+          "scope": "window"
+        },
+        "terminalSounds.volume": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Volume level for terminal sounds (0-100).",
+          "scope": "window"
+        },
+        "terminalSounds.sounds.terminalOpened": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when a terminal is opened.",
+          "scope": "window"
+        },
+        "terminalSounds.sounds.terminalClosed": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when a terminal is closed.",
+          "scope": "window"
+        },
+        "terminalSounds.sounds.commandStarted": {
+          "type": "boolean",
+          "default": false,
+          "description": "Play a sound when a command starts executing (requires shell integration).",
+          "scope": "window"
+        },
+        "terminalSounds.sounds.commandSucceeded": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when a command completes successfully (requires shell integration).",
+          "scope": "window"
+        },
+        "terminalSounds.sounds.commandFailed": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when a command fails with a non-zero exit code (requires shell integration).",
+          "scope": "window"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "terminalSounds.testSounds",
+        "title": "Terminal Sounds: Test All Sounds"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "npm run generate-sounds && node esbuild.mjs --production",
+    "watch": "node esbuild.mjs --watch",
+    "generate-sounds": "tsx scripts/generate-sounds.ts",
+    "package": "npx @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.93.0",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
