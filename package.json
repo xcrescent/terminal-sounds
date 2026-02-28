@@ -5,6 +5,10 @@
   "version": "0.1.0",
   "publisher": "xcrescent",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcrescent/terminal-sounds"
+  },
   "engines": {
     "vscode": "^1.93.0"
   },
