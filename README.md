@@ -14,6 +14,24 @@ A VS Code extension that plays short sound effects on terminal events — open, 
 
 Command-level sounds (start/success/fail) require [VS Code shell integration](https://code.visualstudio.com/docs/terminal/shell-integration) (enabled by default in VS Code 1.93+ for bash, zsh, fish, and PowerShell).
 
+### Command-Specific Sounds
+
+Recognized commands get their own distinct sound that **overrides** the generic success sound:
+
+| Category | Commands | Sound |
+|----------|----------|-------|
+| Git | `git` | Quick double-tap pluck (G4 → B4) |
+| Package manager | `npm install`, `yarn`, `pnpm`, `pip`, `brew`, `apt`, `gem`, `composer` | Bubbly ascending arpeggio (E4 → G4 → B4 → E5) |
+| Testing | `jest`, `pytest`, `vitest`, `mocha`, `cargo test`, `go test`, `rspec` | Radar ping (D5 → A5) |
+| Build/run | `npm run`, `node`, `python`, `make`, `cargo`, `go`, `docker`, `webpack`, `tsc`, `gcc` | Mechanical whirr ramp-up |
+| Cloud/infra | `kubectl`, `terraform`, `aws`, `gcloud`, `az`, `helm`, `vercel`, `netlify` | Deep ambient hum |
+| Database | `mysql`, `psql`, `mongo`, `redis-cli`, `sqlite3`, `pg_dump` | Data chirp (C6 → G5 → C6) |
+| Network | `curl`, `wget`, `ping`, `dig`, `nslookup`, `nmap` | Rising signal swoosh |
+| File ops | `cp`, `mv`, `rm`, `mkdir`, `touch`, `tar`, `zip`, `rsync` | Quick shuffle click |
+| Navigation | `cd`, `ls`, `pwd`, `ssh`, `cat`, `find`, `grep`, `rg`, `tree` | Soft pop blip |
+
+If a command fails (non-zero exit), the generic fail sound plays regardless of category.
+
 ## Settings
 
 All settings are under `terminalSounds.*` in VS Code settings:
@@ -27,10 +45,32 @@ All settings are under `terminalSounds.*` in VS Code settings:
 | `terminalSounds.sounds.commandStarted` | boolean | `false` | Sound on command start |
 | `terminalSounds.sounds.commandSucceeded` | boolean | `true` | Sound on exit code 0 |
 | `terminalSounds.sounds.commandFailed` | boolean | `true` | Sound on non-zero exit |
+| `terminalSounds.customSounds.terminalOpened` | string | `""` | Custom `.wav` file path for terminal opened |
+| `terminalSounds.customSounds.terminalClosed` | string | `""` | Custom `.wav` file path for terminal closed |
+| `terminalSounds.customSounds.commandStarted` | string | `""` | Custom `.wav` file path for command started |
+| `terminalSounds.customSounds.commandSucceeded` | string | `""` | Custom `.wav` file path for command succeeded |
+| `terminalSounds.customSounds.commandFailed` | string | `""` | Custom `.wav` file path for command failed |
+
+Set any `customSounds` path to an absolute path to a `.wav` file to override the built-in sound. Leave empty to use the default.
+
+### Command-Specific Sound Settings
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `terminalSounds.commandSounds.enabled` | boolean | `true` | Enable command-specific sounds |
+| `terminalSounds.commandSounds.custom.git` | string | `""` | Custom `.wav` for git commands |
+| `terminalSounds.commandSounds.custom.package` | string | `""` | Custom `.wav` for package manager commands |
+| `terminalSounds.commandSounds.custom.build` | string | `""` | Custom `.wav` for build/run commands |
+| `terminalSounds.commandSounds.custom.navigation` | string | `""` | Custom `.wav` for navigation commands |
+| `terminalSounds.commandSounds.custom.network` | string | `""` | Custom `.wav` for network commands |
+| `terminalSounds.commandSounds.custom.fileops` | string | `""` | Custom `.wav` for file operation commands |
+| `terminalSounds.commandSounds.custom.cloud` | string | `""` | Custom `.wav` for cloud/infra commands |
+| `terminalSounds.commandSounds.custom.database` | string | `""` | Custom `.wav` for database commands |
+| `terminalSounds.commandSounds.custom.testing` | string | `""` | Custom `.wav` for test runner commands |
 
 ## Commands
 
-- **Terminal Sounds: Test All Sounds** — plays all 5 sounds in sequence (ignores per-event toggles)
+- **Terminal Sounds: Test All Sounds** — plays all 14 sounds in sequence (5 event + 9 command category sounds)
 
 ---
 

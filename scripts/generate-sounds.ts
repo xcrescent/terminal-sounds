@@ -109,6 +109,69 @@ const sounds: Record<string, ToneSegment[]> = {
       type: "square" as const,
     })),
   ],
+
+  // Command-specific sounds
+  "cmd-git": [
+    // Quick double-tap pluck — G4 → B4
+    { frequency: 392.0, durationMs: 50, amplitude: 0.5, fadeInMs: 2, fadeOutMs: 15 },
+    { frequency: 493.88, durationMs: 70, amplitude: 0.5, fadeInMs: 2, fadeOutMs: 20 },
+  ],
+  "cmd-package": [
+    // Bubbly ascending — E4 → G4 → B4 → E5
+    { frequency: 329.63, durationMs: 50, amplitude: 0.4, fadeInMs: 2, fadeOutMs: 8 },
+    { frequency: 392.0, durationMs: 50, amplitude: 0.4, fadeInMs: 2, fadeOutMs: 8 },
+    { frequency: 493.88, durationMs: 50, amplitude: 0.45, fadeInMs: 2, fadeOutMs: 8 },
+    { frequency: 659.25, durationMs: 70, amplitude: 0.5, fadeInMs: 2, fadeOutMs: 20 },
+  ],
+  "cmd-build": [
+    // Mechanical whirr — low square wave ramp up
+    ...Array.from({ length: 6 }, (_, i) => ({
+      frequency: 200 + i * 50,
+      durationMs: 30,
+      amplitude: 0.4,
+      fadeInMs: 2,
+      fadeOutMs: 2,
+      type: "square" as const,
+    })),
+    { frequency: 523.25, durationMs: 60, amplitude: 0.5, fadeInMs: 3, fadeOutMs: 20 },
+  ],
+  "cmd-navigation": [
+    // Soft single pop — short sine blip
+    { frequency: 880, durationMs: 40, amplitude: 0.35, fadeInMs: 2, fadeOutMs: 15 },
+  ],
+  "cmd-network": [
+    // Swoosh — rising sine sweep like a signal being sent
+    ...Array.from({ length: 8 }, (_, i) => ({
+      frequency: 300 + i * 80,
+      durationMs: 25,
+      amplitude: 0.3 + i * 0.025,
+      fadeInMs: 2,
+      fadeOutMs: 3,
+      type: "sine" as const,
+    })),
+  ],
+  "cmd-fileops": [
+    // Quick shuffle — two short clicks
+    { frequency: 1200, durationMs: 15, amplitude: 0.4, fadeInMs: 1, fadeOutMs: 5, type: "square" as const },
+    { frequency: 900, durationMs: 20, amplitude: 0.35, fadeInMs: 1, fadeOutMs: 8 },
+  ],
+  "cmd-cloud": [
+    // Deep ambient hum — low tone rising to mid
+    { frequency: 150, durationMs: 80, amplitude: 0.4, fadeInMs: 10, fadeOutMs: 10 },
+    { frequency: 220, durationMs: 80, amplitude: 0.45, fadeInMs: 5, fadeOutMs: 10 },
+    { frequency: 330, durationMs: 60, amplitude: 0.4, fadeInMs: 5, fadeOutMs: 20 },
+  ],
+  "cmd-database": [
+    // Data chirp — quick high-low-high triplet
+    { frequency: 1046.5, durationMs: 30, amplitude: 0.35, fadeInMs: 2, fadeOutMs: 8 },
+    { frequency: 784, durationMs: 30, amplitude: 0.3, fadeInMs: 2, fadeOutMs: 8 },
+    { frequency: 1046.5, durationMs: 40, amplitude: 0.35, fadeInMs: 2, fadeOutMs: 15 },
+  ],
+  "cmd-testing": [
+    // Checking ping — two ascending pings like a radar
+    { frequency: 587.33, durationMs: 50, amplitude: 0.4, fadeInMs: 2, fadeOutMs: 15 },
+    { frequency: 880, durationMs: 60, amplitude: 0.45, fadeInMs: 2, fadeOutMs: 20 },
+  ],
 };
 
 const soundsDir = path.join(__dirname, "..", "sounds");

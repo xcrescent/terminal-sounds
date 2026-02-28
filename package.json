@@ -2,7 +2,7 @@
   "name": "terminal-sounds",
   "displayName": "Terminal Sounds",
   "description": "Plays sounds on terminal events: open, close, command start, success, and failure.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "xcrescent",
   "license": "MIT",
   "repository": {
@@ -65,6 +65,96 @@
           "type": "boolean",
           "default": true,
           "description": "Play a sound when a command fails with a non-zero exit code (requires shell integration).",
+          "scope": "window"
+        },
+        "terminalSounds.customSounds.terminalOpened": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom .wav file for terminal opened. Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.customSounds.terminalClosed": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom .wav file for terminal closed. Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.customSounds.commandStarted": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom .wav file for command started. Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.customSounds.commandSucceeded": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom .wav file for command succeeded. Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.customSounds.commandFailed": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom .wav file for command failed. Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play command-specific sounds for recognized commands (git, npm, etc.). Overrides generic success sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.git": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for git commands. Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.package": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for package manager commands (npm install, yarn, pip, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.build": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for build/run commands (npm run, make, docker, python, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.navigation": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for navigation commands (cd, ls, ssh, find, grep, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.network": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for network commands (curl, wget, ping, dig, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.fileops": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for file operation commands (cp, mv, rm, mkdir, tar, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.cloud": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for cloud/infra commands (kubectl, terraform, aws, gcloud, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.database": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for database commands (mysql, psql, mongo, redis-cli, etc.). Leave empty to use built-in sound.",
+          "scope": "window"
+        },
+        "terminalSounds.commandSounds.custom.testing": {
+          "type": "string",
+          "default": "",
+          "description": "Custom .wav file path for test runner commands (jest, pytest, vitest, mocha, etc.). Leave empty to use built-in sound.",
           "scope": "window"
         }
       }

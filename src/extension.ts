@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { SoundManager, SoundEvent } from "./soundManager";
+import { SoundManager, SoundEvent, CommandCategory } from "./soundManager";
 
 let soundManager: SoundManager;
 let outputChannel: vscode.OutputChannel;
@@ -40,9 +40,19 @@ export function activate(context: vscode.ExtensionContext): void {
 
     context.subscriptions.push(
       vscode.window.onDidEndTerminalShellExecution((event) => {
-        // exitCode is directly on the event object (already resolved)
         const exitCode = event.exitCode;
-        outputChannel.appendLine(`Event: command ended — exitCode=${exitCode}`);
+        const commandLine = event.execution.commandLine?.value ?? "";
+        outputChannel.appendLine(`Event: command ended — "${commandLine}" exitCode=${exitCode}`);
+
+        // Check for command-specific sound (overrides generic success/fail)
+        const category = soundManager.matchCommand(commandLine);
+        if (category && exitCode === 0) {
+          outputChannel.appendLine(`  Matched category: ${category}`);
+          soundManager.playCommand(category);
+          return;
+        }
+
+        // Fall back to generic success/fail
         if (exitCode === 0) {
           soundManager.play("commandSucceeded");
         } else if (exitCode !== undefined) {
@@ -70,6 +80,12 @@ export function activate(context: vscode.ExtensionContext): void {
       for (const name of events) {
         vscode.window.showInformationMessage(`Playing: ${name}`);
         soundManager.playForce(name);
+        await new Promise((resolve) => setTimeout(resolve, 600));
+      }
+      const categories: CommandCategory[] = ["git", "package", "build", "navigation"];
+      for (const cat of categories) {
+        vscode.window.showInformationMessage(`Playing: cmd-${cat}`);
+        soundManager.playForceCommand(cat);
         await new Promise((resolve) => setTimeout(resolve, 600));
       }
     })
