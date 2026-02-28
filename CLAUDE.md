@@ -51,9 +51,9 @@ Command-specific sounds override generic success/fail. Matching is prefix-based 
 6. Run `npm run build` to generate the new `.wav` and verify
 
 ## Publishing
-- **GitHub**: `gh release create v<x.y.z> terminal-sounds-<x.y.z>.vsix`
-- **VS Code Marketplace**: `npx @vscode/vsce publish` (needs PAT setup)
-- **Open VSX**: `npx ovsx publish <vsix> -p <token>`
+- **CI/CD**: `.github/workflows/publish.yml` auto-publishes on GitHub release to both VS Code Marketplace and Open VSX. Requires `VSCE_PAT` and `OVSX_PAT` repo secrets.
+- **Release flow**: `npm run package` → `gh release create v<x.y.z> terminal-sounds-<x.y.z>.vsix` → workflow handles the rest
+- **Manual**: `npx @vscode/vsce publish` / `npx ovsx publish <vsix> -p <token>`
 - Publisher: `xcrescent`
 - Repo: https://github.com/xcrescent/terminal-sounds
 

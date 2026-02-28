@@ -114,6 +114,21 @@ Install the `.vsix` via `Cmd+Shift+P` → **"Extensions: Install from VSIX..."**
 
 ### Publish
 
+**Automated (recommended):** A GitHub Actions workflow (`.github/workflows/publish.yml`) publishes to both VS Code Marketplace and Open VSX whenever a GitHub release is created.
+
+Setup — add these repository secrets at `Settings → Secrets → Actions`:
+
+| Secret | Source |
+|--------|--------|
+| `VSCE_PAT` | Azure DevOps → Profile → Personal access tokens (scope: Marketplace > Manage) |
+| `OVSX_PAT` | https://open-vsx.org → Account → Access Tokens |
+
+Then create a release:
+```bash
+gh release create v<x.y.z> terminal-sounds-<x.y.z>.vsix --title "v<x.y.z>" --notes "Release notes"
+```
+
+**Manual:**
 ```bash
 # VS Code Marketplace
 npx @vscode/vsce login <publisher>
